@@ -1,0 +1,18 @@
+### Endpoints
+
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | `/character/{id}` | Personaje de Rick & Morty por ID |
+| GET | `/pokemon/{name}` | Pokémon por nombre |
+| GET | `/combined?char_id={id}&pokemon={name}` | Respuesta combinada |
+| GET | `/health` | Estado de breakers |
+
+### Variables de entorno
+
+| Variable | Default | Descripción |
+|----------|---------|-------------|
+| `PORT` | 8080 | Puerto del servidor |
+| `RICK_URL` | <https://rickandmortyapi.com/api> | Base Rick API |
+| `POKE_URL` | <https://pokeapi.co/api/v2> | Base PokéAPI |
+| `HTTP_TIMEOUT_MS` | 3000 | Timeout HTTP externo |
+| `LOG_LEVEL` | info | info / debug |
