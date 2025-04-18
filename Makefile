@@ -15,3 +15,7 @@ fmt:             ## formatea
 
 tidy:            ## resuelve dependencias
 	go mod tidy
+
+cover:
+	go test ./... -coverprofile=coverage.out
+	go tool cover -func=coverage.out
