@@ -2,20 +2,33 @@ package handler
 
 import (
 	"net/http"
-	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/EliasEMC/rickpoke-poc/internal/usecase"
 )
 
-func RegisterPokemonRoutes(r *gin.RouterGroup, uc usecase.FetchPokemon) {
-	r.GET("/pokemon/:name", func(c *gin.Context) {
-		name := strings.ToLower(c.Param("name"))
-		res, err := uc.Get(c.Request.Context(), name)
-		if err != nil {
-			c.JSON(http.StatusBadGateway, gin.H{"error": err.Error()})
-			return
-		}
-		c.JSON(http.StatusOK, res)
-	})
+type PokemonHandler struct {
+	uc usecase.FetchPokemon
+}
+
+func NewPokemonHandler(uc usecase.FetchPokemon) *PokemonHandler {
+	return &PokemonHandler{uc: uc}
+}
+
+func (h *PokemonHandler) Get(c *gin.Context) {
+	name := c.Param("name")
+	res, err := h.uc.Get(c.Request.Context(), name)
+	if err != nil {
+		c.JSON(http.StatusBadGateway, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, res)
+}
+
+// RegisterPokemonRoutes registra las rutas de Pokémon en el router
+func RegisterPokemonRoutes(router *gin.Engine, handler *PokemonHandler) {
+	pokemon := router.Group("/pokemon")
+	{
+		pokemon.GET("/:name", handler.Get)
+	}
 }
