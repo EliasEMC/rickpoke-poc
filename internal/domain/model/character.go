@@ -9,3 +9,8 @@ type Pokemon struct {
 	Name string `json:"name"`
 	Type string `json:"type"`
 }
+
+// type Character struct {
+// 	ID       int      `json:"id"`
+// 	Name     string   `json:"name"`
+// }

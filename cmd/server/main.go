@@ -3,12 +3,13 @@ package main
 import (
 	_ "github.com/joho/godotenv/autoload" // carga .env
 	"go.uber.org/zap"
+
 	//"time"
 
 	"github.com/EliasEMC/rickpoke-poc/internal/adapter/api"
 	"github.com/EliasEMC/rickpoke-poc/internal/config"
-	httpinfra "github.com/EliasEMC/rickpoke-poc/internal/infrastructure/http"
 	"github.com/EliasEMC/rickpoke-poc/internal/infrastructure/circuitbreaker"
+	httpinfra "github.com/EliasEMC/rickpoke-poc/internal/infrastructure/http"
 	"github.com/EliasEMC/rickpoke-poc/internal/usecase"
 	"github.com/EliasEMC/rickpoke-poc/pkg/utils"
 )
