@@ -258,4 +258,66 @@ Para cambiar entre PostgreSQL y MongoDB:
 - Implementa logging estructurado con Zap
 - Usa circuit breakers para manejar fallos en APIs externas
 - Soporta múltiples bases de datos mediante adaptadores
-- Implementa health checks para monitoreo 
+- Implementa health checks para monitoreo
+
+## 🐳 Docker
+
+El proyecto está configurado para ejecutarse con Docker y Docker Compose. Esto permite ejecutar la aplicación y sus dependencias (PostgreSQL y MongoDB) en contenedores aislados.
+
+### Requisitos
+- Docker
+- Docker Compose
+
+### Ejecutar con Docker
+
+1. Construir y levantar los contenedores:
+```bash
+docker-compose up --build
+```
+
+2. Para ejecutar en segundo plano:
+```bash
+docker-compose up -d
+```
+
+3. Para detener los contenedores:
+```bash
+docker-compose down
+```
+
+4. Para ver los logs:
+```bash
+docker-compose logs -f
+```
+
+### Cambiar entre Bases de Datos
+
+Para cambiar entre PostgreSQL y MongoDB, modifica el archivo `.env` en el contenedor de la aplicación:
+
+1. Para PostgreSQL:
+```env
+DB_TYPE=postgres
+DB_HOST=postgres
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=postgres
+```
+
+2. Para MongoDB:
+```env
+DB_TYPE=mongodb
+DB_HOST=mongodb
+DB_PORT=27017
+DB_USER=root
+DB_PASSWORD=example
+```
+
+### Volúmenes
+
+Los datos de las bases de datos se persisten en volúmenes Docker:
+- `postgres_data`: Datos de PostgreSQL
+- `mongodb_data`: Datos de MongoDB
+
+### Migraciones
+
+Las migraciones de PostgreSQL se ejecutan automáticamente al iniciar el contenedor por primera vez. Los scripts de migración se encuentran en el directorio `migrations/`. 
