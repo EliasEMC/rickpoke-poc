@@ -24,3 +24,11 @@ func (h *PokemonHandler) Get(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, res)
 }
+
+// RegisterPokemonRoutes registra las rutas de Pokémon en el router
+func RegisterPokemonRoutes(router *gin.Engine, handler *PokemonHandler) {
+	pokemon := router.Group("/pokemon")
+	{
+		pokemon.GET("/:name", handler.Get)
+	}
+}
